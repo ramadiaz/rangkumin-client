@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        acorn: ['var(--font-acorn)'],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
