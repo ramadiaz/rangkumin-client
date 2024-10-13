@@ -46,16 +46,16 @@ const Page = () => {
               inputWrapper: ["bg-opacity-80"],
             }}
           />
-          <div className="my-3 w-full flex flex-row gap-3 justify-end items-center">
-            <div>
-              <h2 className={isLimited ? "text-rose-700" : ""}>
-                {totalWords} / 1000
-              </h2>
-            </div>
-            <Button isDisabled={isLimited} className="">
-              Summarize
-            </Button>
+        </div>
+        <div className="my-3 sm:w-9/12 md:w-6/12 mx-auto flex flex-row gap-3 justify-end items-center">
+          <div>
+            <h2 className={isLimited ? "text-rose-700" : ""}>
+              {totalWords} / 1000
+            </h2>
           </div>
+          <Button isDisabled={isLimited} className="">
+            Summarize
+          </Button>
         </div>
       </div>
     </div>
