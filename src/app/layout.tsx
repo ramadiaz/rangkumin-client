@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.scss";
+import { Providers } from "./providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,14 +32,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${acorn8.variable} antialiased relative dark`}
+        className={`${geistSans.variable} ${geistMono.variable} ${acorn8.variable} dark`}
       >
-        <div className="z-20 absolute w-screen h-screen bg-black/20">{children}</div>
-        <div className="wrap z-0 absolute top-0 right-0 w-screen h-screen">
-          {Array.from({ length: 100 }).map((_, index) => (
-            <div className="tri z-0" key={index}></div>
-          ))}
-        </div>
+        <Providers>
+          <div className="relative w-screen h-screen">
+            <div className="z-50 absolute w-screen h-screen bg-black/20">
+              {children}
+            </div>
+            <div className="wrap z-0 absolute top-0 right-0 w-screen h-screen">
+              {Array.from({ length: 100 }).map((_, index) => (
+                <div className="tri z-0" key={index}></div>
+              ))}
+            </div>
+          </div>
+        </Providers>
       </body>
     </html>
   );
