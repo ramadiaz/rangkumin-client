@@ -51,14 +51,22 @@ const Page = () => {
 
       if (res.status == 200) {
         setResult(res.data.body);
-      } else if (res.status == 403) {
-        toast.error("Request blocked due to safety concerns");
-      } else if (res.status == 429) {
-        toast.error("Too many requests. Please try again later.");
       }
     } catch (err) {
-      console.error(err);
-      toast.error("An unexpected error occurred.");
+      if (axios.isAxiosError(err) && err.response) {
+        const status = err.response.status;
+
+        if (status === 403) {
+          toast.error("Request blocked due to safety concerns");
+        } else if (status === 429) {
+          toast.error("Too many requests. Please try again later.");
+        } else {
+          toast.error(err.response.data?.message || "An error occurred.");
+        }
+      } else {
+        console.error("Unexpected error:", err);
+        toast.error("An unexpected error occurred.");
+      }
     } finally {
       setIsLoading(false);
     }
