@@ -26,6 +26,7 @@ export const LanguageSelector = () => {
       <Tabs
         aria-label="Options"
         selectedKey={selected}
+        size="sm"
         onSelectionChange={(e) => handleChange(e.toString())}
       >
         <Tab key="EN" title="EN"></Tab>

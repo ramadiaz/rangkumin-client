@@ -70,7 +70,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${acorn8.variable} dark`}
+        className={`${geistSans.variable} ${geistMono.variable} ${acorn8.variable} dark bg-black`}
       >
         <Providers>
           <div className="relative w-full min-h-screen overflow-auto">
@@ -82,7 +82,19 @@ export default function RootLayout({
                 <div className="tri z-0" key={index}></div>
               ))}
             </div>
-            
+            <div className="fixed z-30 bottom-0 w-full py-2 bg-zinc-800/80 backdrop-blur-sm">
+              <h2 className="text-center text-sm">
+                Handcrafted by{" "}
+                <a
+                  className="font-semibold"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://xann.my.id"
+                >
+                  Xanny
+                </a>
+              </h2>
+            </div>
           </div>
           <Toaster richColors />
         </Providers>
