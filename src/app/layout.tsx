@@ -82,7 +82,7 @@ export default function RootLayout({
               ))}
             </div>
           </div>
-          <Toaster />
+          <Toaster richColors />
         </Providers>
       </body>
     </html>

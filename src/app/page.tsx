@@ -57,9 +57,9 @@ const Page = () => {
         const status = err.response.status;
 
         if (status === 403) {
-          toast.error("Request blocked due to safety concerns");
+          toast.warning("Request blocked due to safety concerns");
         } else if (status === 429) {
-          toast.error("Too many requests. Please try again later.");
+          toast.warning("Too many requests. Please try again later.");
         } else {
           toast.error(err.response.data?.message || "An error occurred.");
         }
