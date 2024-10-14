@@ -101,7 +101,7 @@ const Page = () => {
           <Markdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw, rehypeHighlight]}
-            className="prose prose-headings:text-gray-50 prose-strong:text-gray-50 text-gray-50"
+            className="prose prose-headings:text-gray-50 prose-strong:text-gray-50 prose-code:text-gray-50 text-gray-50"
           >
             {result}
           </Markdown>
