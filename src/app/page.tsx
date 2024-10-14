@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
-import axios from "axios";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -48,32 +47,25 @@ const Page = () => {
       formData.append("text", text);
       formData.append("lang", current_lang);
 
-      const res = await axios.post(BASE_API + "/generate/rangkumin", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "Cache-Control": "no-store",
-          "Pragma": "no-cache",
-        },
+      const res = await fetch(BASE_API + "/generate/rangkumin", {
+        method: "POST",
+        cache: "no-store",
+        body: formData,
       });
 
       if (res.status == 200) {
-        setResult(res.data.body);
+        const data = await res.json();
+        setResult(data.body);
+      } else if (res.status === 403) {
+        toast.warning("Request blocked due to safety concerns");
+      } else if (res.status === 429) {
+        toast.warning("Too many requests. Please try again later.");
+      } else {
+        const data = await res.json();
+        toast.error(data.error || "An error occurred.");
       }
     } catch (err) {
-      if (axios.isAxiosError(err) && err.response) {
-        const status = err.response.status;
-
-        if (status === 403) {
-          toast.warning("Request blocked due to safety concerns");
-        } else if (status === 429) {
-          toast.warning("Too many requests. Please try again later.");
-        } else {
-          toast.error(err.response.data?.message || "An error occurred.");
-        }
-      } else {
-        console.error("Unexpected error:", err);
-        toast.error("An unexpected error occurred.");
-      }
+      toast.error("An unexpected error occurred.");
     } finally {
       setIsLoading(false);
     }
