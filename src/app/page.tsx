@@ -51,6 +51,8 @@ const Page = () => {
       const res = await axios.post(BASE_API + "/generate/rangkumin", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          "Cache-Control": "no-store",
+          "Pragma": "no-cache",
         },
       });
 
