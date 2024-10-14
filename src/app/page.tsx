@@ -10,6 +10,7 @@ import rehypeRaw from "rehype-raw";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github.css";
 import { toast } from "sonner";
+import { LanguageSelector } from "@/component/LanguageSelector";
 
 const BASE_API = process.env.NEXT_PUBLIC_BASE_API_URL;
 
@@ -39,9 +40,13 @@ const Page = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     setResult("");
+
+    const current_lang = localStorage.getItem("lang") || "EN";
+
     try {
       const formData = new FormData();
       formData.append("text", text);
+      formData.append("lang", current_lang);
 
       const res = await axios.post(BASE_API + "/generate/rangkumin", formData, {
         headers: {
@@ -100,6 +105,7 @@ const Page = () => {
               {totalWords} / 1000
             </h2>
           </div>
+          <LanguageSelector />
           <Button
             isDisabled={isLimited}
             isLoading={isLoading}

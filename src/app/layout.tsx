@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.scss";
 import { Providers } from "./providers";
 import { Toaster } from "sonner";
+import { LanguageSelector } from "@/component/LanguageSelector";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -72,8 +73,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${acorn8.variable} dark`}
       >
         <Providers>
-          <div className="relative w-full h-screen overflow-auto">
-            <div className="z-50 absolute w-full min-h-screen bg-black/20">
+          <div className="relative w-full min-h-screen overflow-auto">
+            <div className="z-20 absolute w-full min-h-screen bg-black/20">
               {children}
             </div>
             <div className="wrap z-0 fixed top-0 right-0 w-screen h-screen">
@@ -81,6 +82,7 @@ export default function RootLayout({
                 <div className="tri z-0" key={index}></div>
               ))}
             </div>
+            
           </div>
           <Toaster richColors />
         </Providers>
