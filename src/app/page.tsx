@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
+import axios from "axios";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -47,25 +48,32 @@ const Page = () => {
       formData.append("text", text);
       formData.append("lang", current_lang);
 
-      const res = await fetch(BASE_API + "/generate/rangkumin", {
-        method: "POST",
-        cache: "no-store",
-        body: formData,
+      const res = await axios.post(BASE_API + "/generate/rangkumin", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Cache-Control": "no-store",
+          Pragma: "no-cache",
+        },
       });
 
       if (res.status == 200) {
-        const data = await res.json();
-        setResult(data.body);
-      } else if (res.status === 403) {
-        toast.warning("Request blocked due to safety concerns");
-      } else if (res.status === 429) {
-        toast.warning("Too many requests. Please try again later.");
-      } else {
-        const data = await res.json();
-        toast.error(data.error || "An error occurred.");
+        setResult(res.data.body);
       }
     } catch (err) {
-      toast.error("An unexpected error occurred.");
+      if (axios.isAxiosError(err) && err.response) {
+        const status = err.response.status;
+
+        if (status === 403) {
+          toast.warning("Request blocked due to safety concerns");
+        } else if (status === 429) {
+          toast.warning("Too many requests. Please try again later.");
+        } else {
+          toast.error(err.response.data?.message || "An error occurred.");
+        }
+      } else {
+        console.error("Unexpected error:", err);
+        toast.error("An unexpected error occurred.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -119,7 +127,7 @@ const Page = () => {
             rehypePlugins={[rehypeRaw, rehypeHighlight]}
             className="prose prose-headings:text-gray-50 prose-strong:text-gray-50 prose-code:text-gray-50 text-gray-50"
           >
-            {`## Damar Canggih Wicaksono, Dono Warkop's Son, Meets Indro Warkop\n\nThis article highlights the recent meeting between Damar Canggih Wicaksono, the son of the late comedian Dono Warkop DKI, and Indro Warkop DKI. \n\nDamar and his wife visited Indro at his home, sparking a lot of attention from the public. \n\nMany people commented on Damar's resemblance to his father, Dono, especially in his younger years. \n\nDamar's academic background, which includes a degree in Nuclear Engineering from Universitas Gadjah Mada (UGM) and a master's and doctorate from École polytechnique fédérale de Lausanne (EPFL), was also widely praised. \n\nDamar is fluent in German and English and has worked as a postdoctoral researcher in various institutions, including ETH Zurich and Helmholtz-Zentrum Dresden-Rossendorf (HZDR). \n`}
+            {result}
           </Markdown>
         </div>
       </div>
