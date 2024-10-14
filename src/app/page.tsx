@@ -9,6 +9,7 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github.css";
+import { toast } from "sonner";
 
 const BASE_API = process.env.NEXT_PUBLIC_BASE_API_URL;
 
@@ -50,11 +51,14 @@ const Page = () => {
 
       if (res.status == 200) {
         setResult(res.data.body);
-
-        console.log(res.data.body);
+      } else if (res.status == 403) {
+        toast.error("Request blocked due to safety concerns");
+      } else if (res.status == 429) {
+        toast.error("Too many requests. Please try again later.");
       }
     } catch (err) {
       console.error(err);
+      toast.error("An unexpected error occurred.");
     } finally {
       setIsLoading(false);
     }
@@ -97,7 +101,11 @@ const Page = () => {
             Summarize
           </Button>
         </div>
-        <div className={`sm:w-9/12 md:w-6/12 mx-auto bg-zinc-800/80 px-6 py-8 rounded-lg backdrop-blur-sm my-10 ${result ? "" : "hidden"}`}>
+        <div
+          className={`sm:w-9/12 md:w-6/12 mx-auto bg-zinc-800/80 px-6 py-8 rounded-lg backdrop-blur-sm my-10 ${
+            result ? "" : "hidden"
+          }`}
+        >
           <Markdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw, rehypeHighlight]}
