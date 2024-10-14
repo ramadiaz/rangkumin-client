@@ -125,7 +125,7 @@ const Page = () => {
             rehypePlugins={[rehypeRaw, rehypeHighlight]}
             className="prose prose-headings:text-gray-50 prose-strong:text-gray-50 prose-code:text-gray-50 text-gray-50"
           >
-            {result}
+            {`## Damar Canggih Wicaksono, Dono Warkop's Son, Meets Indro Warkop\n\nThis article highlights the recent meeting between Damar Canggih Wicaksono, the son of the late comedian Dono Warkop DKI, and Indro Warkop DKI. \n\nDamar and his wife visited Indro at his home, sparking a lot of attention from the public. \n\nMany people commented on Damar's resemblance to his father, Dono, especially in his younger years. \n\nDamar's academic background, which includes a degree in Nuclear Engineering from Universitas Gadjah Mada (UGM) and a master's and doctorate from École polytechnique fédérale de Lausanne (EPFL), was also widely praised. \n\nDamar is fluent in German and English and has worked as a postdoctoral researcher in various institutions, including ETH Zurich and Helmholtz-Zentrum Dresden-Rossendorf (HZDR). \n`}
           </Markdown>
         </div>
       </div>
