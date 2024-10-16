@@ -16,7 +16,7 @@ const AboutButton = () => {
 
   return (
     <>
-      <Button onPress={onOpen} isIconOnly>
+      <Button onClick={onOpen} isIconOnly>
         <Info size={24} color="#f9fafb" />
       </Button>
       <Modal
