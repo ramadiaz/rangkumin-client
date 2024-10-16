@@ -12,6 +12,7 @@ import "highlight.js/styles/github.css";
 import { toast } from "sonner";
 import { LanguageSelector } from "@/component/LanguageSelector";
 import CopyIcon from "@/component/Icons/CopyIcon";
+import MoonStars from "@/component/Icons/MoonStars";
 
 const BASE_API = process.env.NEXT_PUBLIC_BASE_API_URL;
 
@@ -115,10 +116,11 @@ const Page = () => {
           </div>
           <LanguageSelector />
           <Button
-            isDisabled={isLimited}
+            isDisabled={isLimited || text == ""}
             isLoading={isLoading}
             className=""
             onClick={handleSubmit}
+            endContent={<MoonStars size={18} color="#fcd34d" />}
           >
             Summarize
           </Button>
