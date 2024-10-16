@@ -95,7 +95,7 @@ export default function RootLayout({
               </h2>
             </div>
           </div>
-          <Toaster richColors />
+          <Toaster richColors offset={"45px"} />
         </Providers>
       </body>
     </html>

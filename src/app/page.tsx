@@ -11,6 +11,7 @@ import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github.css";
 import { toast } from "sonner";
 import { LanguageSelector } from "@/component/LanguageSelector";
+import CopyIcon from "@/component/Icons/CopyIcon";
 
 const BASE_API = process.env.NEXT_PUBLIC_BASE_API_URL;
 
@@ -79,6 +80,11 @@ const Page = () => {
     }
   };
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(result);
+    toast("Copied result");
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center">
       <div className="w-11/12 sm:w-3/4 mx-auto justify-center items-center my-48">
@@ -118,7 +124,7 @@ const Page = () => {
           </Button>
         </div>
         <div
-          className={`sm:w-9/12 md:w-6/12 mx-auto bg-zinc-800/80 px-6 py-8 rounded-lg backdrop-blur-sm my-10 ${
+          className={`sm:w-9/12 md:w-6/12 mx-auto bg-zinc-800/80 px-6 py-8 rounded-lg backdrop-blur-sm my-10 relative ${
             result ? "" : "hidden"
           }`}
         >
@@ -129,6 +135,14 @@ const Page = () => {
           >
             {result}
           </Markdown>
+          <Button
+            isIconOnly
+            size="sm"
+            className="absolute -right-2 -top-2 shadow-lg shadow-black"
+            onClick={handleCopy}
+          >
+            <CopyIcon size={24} color={"#f9fafb"} />
+          </Button>
         </div>
       </div>
     </div>
