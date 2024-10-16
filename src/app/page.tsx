@@ -93,11 +93,11 @@ const Page = () => {
         <AboutButton/>
       </div>
       <div className="w-11/12 sm:w-3/4 mx-auto justify-center items-center my-48">
-        <h1 className="text-center font-acorn text-5xl sm:text-6xl">
+        <h1 className="text-center font-acorn text-5xl sm:text-6xl text-[#f9fafb]">
           Rangkumin.
         </h1>
         <div className="h-2"></div>
-        <h2 className="text-center text-sm opacity-80">
+        <h2 className="text-center text-sm opacity-80 text-[#f9fafb]">
           Summarizing wisdom, where clarity we find.
         </h2>
         <div className="my-4 sm:w-9/12 md:w-6/12 mx-auto backdrop-blur-sm">
