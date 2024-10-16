@@ -31,7 +31,7 @@ const Page = () => {
   useEffect(() => {
     const word_count = getWordCount();
 
-    if (word_count > 1000) {
+    if (word_count > 1500) {
       setIsLimited(true);
     } else {
       setIsLimited(false);
@@ -115,7 +115,7 @@ const Page = () => {
         <div className="my-3 sm:w-9/12 md:w-6/12 mx-auto flex flex-row gap-3 justify-end items-center">
           <div>
             <h2 className={isLimited ? "text-rose-700" : ""}>
-              {totalWords} / 1000
+              {totalWords} / 1500
             </h2>
           </div>
           <LanguageSelector />
