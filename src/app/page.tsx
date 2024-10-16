@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { LanguageSelector } from "@/component/LanguageSelector";
 import CopyIcon from "@/component/Icons/CopyIcon";
 import MoonStars from "@/component/Icons/MoonStars";
+import AboutButton from "@/component/AboutButton";
 
 const BASE_API = process.env.NEXT_PUBLIC_BASE_API_URL;
 
@@ -87,7 +88,10 @@ const Page = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center">
+    <div className="min-h-screen w-full flex items-center relative">
+      <div className="absolute top-4 right-4">
+        <AboutButton/>
+      </div>
       <div className="w-11/12 sm:w-3/4 mx-auto justify-center items-center my-48">
         <h1 className="text-center font-acorn text-5xl sm:text-6xl">
           Rangkumin.

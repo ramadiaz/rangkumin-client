@@ -81,19 +81,6 @@ export default function RootLayout({
                 <div className="tri z-0" key={index}></div>
               ))}
             </div>
-            <div className="fixed z-30 bottom-0 w-full py-2 bg-zinc-800/80 backdrop-blur-sm">
-              <h2 className="text-center text-sm">
-                Handcrafted by{" "}
-                <a
-                  className="font-semibold"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://xann.my.id"
-                >
-                  Xanny
-                </a>
-              </h2>
-            </div>
           </div>
           <Toaster richColors offset={"45px"} />
         </Providers>
